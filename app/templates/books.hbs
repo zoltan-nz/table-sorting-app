@@ -1,0 +1,34 @@
+<h1>Books</h1>
+
+<div class="well">
+  <p>Changing this number regenerate a random list of records. Min: 1, Max: 10000. Don't generate more than 3000, it will freeze your browser.</p>
+
+  <form action="" class="form-inline" {{action 'updateRecords' newRecordNumber on='submit'}}>
+    <div class="form-group">
+      <label for="number-of-records">Number of Records: </label>
+      {{input id='number-of-records' type='number' class='form-control' value=newRecordNumber}}
+      <button type="submit" class="btn btn-default">Regenerate</button>
+    </div>
+  </form>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Author</th>
+    <th>Title</th>
+    <th>Year</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#each model as |book|}}
+    <tr>
+      <td>{{book.id}}</td>
+      <td>{{book.author}}</td>
+      <td>{{book.title}}</td>
+      <td>{{book.year}}</td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
