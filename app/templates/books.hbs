@@ -15,14 +15,14 @@
 <table class="table table-bordered table-striped">
   <thead>
   <tr>
-    <th>Id</th>
-    <th>Author</th>
-    <th>Title</th>
-    <th>Year</th>
+    <th {{action 'sortBy' 'id'}}><a href>Id</a></th>
+    <th {{action 'sortBy' 'author'}}><a href>Author</a></th>
+    <th {{action 'sortBy' 'title'}}><a href>Title</a></th>
+    <th {{action 'sortBy' 'year'}}><a href>Year</a></th>
   </tr>
   </thead>
   <tbody>
-  {{#each model as |book|}}
+  {{#each sortedBooks as |book|}}
     <tr>
       <td>{{book.id}}</td>
       <td>{{book.author}}</td>
