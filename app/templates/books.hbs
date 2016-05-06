@@ -19,6 +19,7 @@
     <th {{action 'sortBy' 'author'}}><a href>Author</a></th>
     <th {{action 'sortBy' 'title'}}><a href>Title</a></th>
     <th {{action 'sortBy' 'year'}}><a href>Year</a></th>
+    <th {{action 'sortBy' 'specialNumber'}}><a href>Dynamic Data</a> <br>(A special computed property)</th>
   </tr>
   </thead>
   <tbody>
@@ -28,6 +29,7 @@
       <td>{{book.author}}</td>
       <td>{{book.title}}</td>
       <td>{{book.year}}</td>
+      <td>{{book.specialNumber}}</td>
     </tr>
   {{/each}}
   </tbody>

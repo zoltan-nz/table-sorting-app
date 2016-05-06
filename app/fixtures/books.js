@@ -25,12 +25,27 @@ export default function generatedBooks(records) {
  * @private
  */
 function _fakeBook(id) {
-  return Ember.Object.create({
+  let newBook = Ember.Object.create({
     id: id,
     author: Faker.name.findName(),
     title: `${Faker.commerce.productName()} Cookbook`,
-    year: Faker.random.number({min: 1940, max: 2016})
+    year: Faker.random.number({min: 1940, max: 2016}),
   });
+
+  // We can add computed property to an Ember.Object only this way.
+  newBook.reopen({
+
+    /**
+     * Generate a special number from the id, year and the length of the string fields.
+     *
+     * @return {Integer}
+     */
+    specialNumber: Ember.computed('id', 'author', 'title', 'year', function() {
+      return this.get('id') + this.get('author.length') + this.get('title.length') + this.get('year');
+    })
+  });
+
+  return newBook;
 }
 
 

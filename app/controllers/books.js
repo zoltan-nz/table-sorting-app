@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  queryParams: ['numberOfRecords', 'id', 'author', 'title', 'year'],
+  queryParams: ['numberOfRecords', 'sortBy', 'sortDir'],
 
   numberOfRecords: 100,
 
@@ -12,24 +12,34 @@ export default Ember.Controller.extend({
   title: false,
   year: false,
 
-  sortProperties: ['id:asc'],
+  // Default sorting
+  sortBy: 'id',
+  sortDir: 'asc',
+
+  sortProperties: Ember.computed('sortBy', 'sortDir', function() {
+    return [`${this.get('sortBy')}:${this.get('sortDir')}`];
+  }),
+
   sortedBooks: Ember.computed.sort('model', 'sortProperties'),
 
   actions: {
-    updateRecords(number) {
+    updateRecords(num) {
 
-      if (number < 1) { number = 1; }
-      if (number > 10000) { number = 10000; }
+      if (num < 1) { num = 1; }
+      if (num > 10000) { num = 10000; }
 
-      this.set('numberOfRecords', number);
+      this.set('numberOfRecords', num);
     },
 
-    sortBy(property) {
-      this.toggleProperty(property);
+    // Called when the table header clicked
+    sortBy(prop) {
 
-      let direction = this.get(property) ? 'desc' : 'asc';
+      // Change the boolean, we use this value for returning desc or asc
+      this.toggleProperty(prop);
+      let direction = this.get(prop) ? 'desc' : 'asc';
 
-      this.set('sortProperties', [`${property}:${direction}`]);
+      this.set('sortBy', prop);
+      this.set('sortDir', direction);
     }
   }
 
